@@ -1,4 +1,6 @@
 import cv2
+import winsound  # Import the winsound module
+import queue
 
 # Initialize the camera (you may need to configure this based on your camera setup)
 cap = cv2.VideoCapture(0)  # 0 represents the default camera
@@ -9,6 +11,9 @@ known_car_width = 2.0  # Example: 2 meters
 # Set the focal length of the camera (you'll need to calibrate this)
 # Focal length = (width of the object in pixels * distance to the object) / known_car_width
 focal_length = 1000.0  # Example: 1000 pixels
+
+# Create an audio queue for alerts
+audio_queue = queue.Queue()
 
 while True:
     # Capture a frame from the camera
@@ -29,8 +34,13 @@ while True:
 
     # Check if the vehicle is too close to the car in front
     if distance < safe_distance:
-        # Trigger an alert (e.g., sound an alarm, display a warning)
-        print("Warning: Too close to the car in front!")
+        # Trigger an audio alert and add it to the audio queue
+        audio_queue.put("alert.wav")  # Replace with your audio alert file
+
+    # Play audio alerts from the queue
+    while not audio_queue.empty():
+        alert_sound = audio_queue.get()
+        winsound.PlaySound(alert_sound, winsound.SND_FILENAME)
 
     # Display the frame with detected objects and distance information
     cv2.imshow('Distance Detection', frame)
