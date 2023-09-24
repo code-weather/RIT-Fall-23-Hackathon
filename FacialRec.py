@@ -25,9 +25,9 @@ while True:
             cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 127, 255), 2)
         if len(eyes) > 0:
             last_detection_time = time.time()
-            winsound.Beep(1000, 200)  # Play a sample sound (1000 Hz, 200 ms duration)
+        #    winsound.Beep(1000, 200)  # Play a sample sound (1000 Hz, 200 ms duration)
 
-    if (time.time() - last_detection_time) > 1.0:
+    if ((time.time() - last_detection_time) > 1.0):
         winsound.Beep(500, 200)  # Play a different sample sound
         print("Eyes not detected")
 
