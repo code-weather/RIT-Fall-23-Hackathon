@@ -1,7 +1,8 @@
 import cv2
-import winsound  # Import the winsound module
+import winsound
 import queue
 from pytube import YouTube
+
 
 video_url = 'https://www.youtube.com/watch?v=ifHdZ83n4E4'
 
@@ -11,15 +12,10 @@ stream.download(filename='car_pov.mp4')
 # Initialize the camera (you may need to configure this based on your camera setup)
 cap = cv2.VideoCapture('car_pov.mp4')  #  Youtube video
 
-# Set the known width of the car in front (in meters)
-known_car_width = 2.0  # Example: 2 meters
 
-# Set the focal length of the camera (you'll need to calibrate this)
-# Focal length = (width of the object in pixels * distance to the object) / known_car_width
-focal_length = 1000.0  # Example: 1000 pixels
 
-# Create an audio queue for alerts
-audio_queue = queue.Queue()
+
+
 car_cascade = cv2.CascadeClassifier('haarcascade_cars.xml')
 
 while True:
@@ -53,6 +49,12 @@ while True:
     # Draw rectangles around detected cars
     for (x, y, w, h) in cars:
         cv2.rectangle(roi, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+        car_size_percentage = (w * h) / (roi_width * roi_height) * 100
+
+        if car_size_percentage >= 20:
+            winsound.Beep(500, 100)
+            print("Too close")
 
     # Display the frame with detected objects and distance information
     cv2.imshow('Distance Detection', frame)
