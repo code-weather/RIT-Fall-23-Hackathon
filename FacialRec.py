@@ -5,7 +5,7 @@ Description: Eye dector
 
 Authors:
 	Jessica Nguyen
-	Author 2
+	Jameson Wang
 	Author 3
 	...
 """

@@ -5,7 +5,7 @@ Description: Car Detector
 
 Authors:
 	Jessica Nguyen
-
+    Jameson Wang
 """
 import cv2
 from pygame import mixer

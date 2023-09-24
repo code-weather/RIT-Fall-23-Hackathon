@@ -5,10 +5,11 @@ Description: Runs Eye Tracker and Car detector
 
 =======
 Authors:
-	Jessica Nguyen, Meghan Black
+	Jessica Nguyen
+	Meghan Black
+	Jameson Wang
 
 """
-
 
 import CarDistance
 import FacialRec
