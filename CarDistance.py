@@ -2,6 +2,7 @@ import cv2
 import winsound  # Import the winsound module
 import queue
 
+
 # Initialize the camera (you may need to configure this based on your camera setup)
 cap = cv2.VideoCapture(0)  # 0 represents the default camera
 
