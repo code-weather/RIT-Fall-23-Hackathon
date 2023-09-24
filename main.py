@@ -1,13 +1,37 @@
-import cv2
+"""
+Main Script
 
-cam = cv2.VideoCapture(0)
+Description: Runs Eye Tracker and Car detector
 
-while True:
-	ret, image = cam.read()
-	cv2.imshow('Imagetest',image)
-	k = cv2.waitKey(1)
-	if k != -1:
-		break
-cv2.imwrite('/home/pi/testimage.jpg', image)
-cam.release()
-cv2.destroyAllWindows()
+Authors:
+	Jessica Nguyen
+
+"""
+
+
+import CarDistance
+import FacialRec
+
+
+def main():
+	'''
+	Asks for user input on whether they would like to use the Car
+	Detector or the facial Recgonition software. Loop until they
+	enter Q.
+	:return: none
+	'''
+	video_url = 'https://www.youtube.com/watch?v=ifHdZ83n4E4'
+	while(True):
+		x = input("Enter C for Car Dection, F for EyeTracker, or Q to quit\t").strip().upper()
+		if (x == "C"):
+			CarDistance.CarDetector(video_url,False)
+		elif (x == "F"):
+			FacialRec.facialRec()
+		elif (x == "Q"):
+			break
+		else:
+			print("Not an option")
+
+
+if __name__ == '__main__':
+	main()
