@@ -5,7 +5,10 @@ Description: Car Detector
 
 Authors:
 	Jessica Nguyen
+	Leo Pozhenko
+	Meghan Black
     Jameson Wang
+    Keaton Fiddler
 """
 import cv2
 from pygame import mixer

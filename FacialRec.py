@@ -1,13 +1,14 @@
 """
 FacialRec
 
-Description: Eye dector
+Description: Eye detector
 
 Authors:
 	Jessica Nguyen
+	Leo Pozhenko
+	Meghan Black
 	Jameson Wang
-	Author 3
-	...
+	Keaton Fiddler
 """
 import cv2
 import time
