@@ -3,7 +3,7 @@ import winsound  # Import the winsound module
 import queue
 from pytube import YouTube
 
-video_url = 'https://www.youtube.com/watch?v=LD2qCy2tGh0'
+video_url = 'https://www.youtube.com/watch?v=ifHdZ83n4E4'
 
 vid = YouTube(video_url)
 stream = vid.streams.get_highest_resolution()
@@ -20,8 +20,8 @@ focal_length = 1000.0  # Example: 1000 pixels
 
 # Create an audio queue for alerts
 audio_queue = queue.Queue()
+car_cascade = cv2.CascadeClassifier('haarcascade_cars.xml')
 
-car_cascade = cv2.CascadeClassifier()
 while True:
     # Capture a frame from the camera
     ret, frame = cap.read()
@@ -44,33 +44,18 @@ while True:
     # Draw a square frame around the ROI
     cv2.rectangle(frame, (roi_x, roi_y), (roi_x + roi_width, roi_y + roi_height), (0, 255, 0), 2)
 
-    # Display the frame with the square frame around the ROI
-    # Perform object detection and find the car in front
-    # (You should use a pre-trained object detection model here)
+    # Gray scale on for Car detection
+    gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 
-    # Calculate the width of the car in pixels
-    # (You can get this information from the object detection result)
-    car_width_pixels = 100  # Example: 100 pixels
+    # Perform vehicle detection
+    cars = car_cascade.detectMultiScale(gray_roi, scaleFactor=1.1, minNeighbors=3, minSize=(30, 30))
 
-    # Calculate the distance to the car in front (in meters)
-    distance = (known_car_width * focal_length) / car_width_pixels
+    # Draw rectangles around detected cars
+    for (x, y, w, h) in cars:
+        cv2.rectangle(roi, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
-    # Set a safe following distance threshold (in meters)
-    safe_distance = 5.0  # Example: 5 meters
-
-    # Check if the vehicle is too close to the car in front
-    if distance < safe_distance:
-        # Trigger an audio alert and add it to the audio queue
-        audio_queue.put("alert.wav")  # Replace with your audio alert file
-
-    # Play audio alerts from the queue
-    while not audio_queue.empty():
-        alert_sound = audio_queue.get()
-        winsound.PlaySound(alert_sound, winsound.SND_FILENAME)
-
-    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     # Display the frame with detected objects and distance information
-    cv2.imshow('Distance Detection', gray_frame)
+    cv2.imshow('Distance Detection', frame)
 
     # Exit the loop when the 'q' key is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
