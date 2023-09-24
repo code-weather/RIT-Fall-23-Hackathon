@@ -9,7 +9,7 @@ vid = YouTube(video_url)
 stream = vid.streams.get_highest_resolution()
 stream.download(filename='car_pov.mp4')
 # Initialize the camera (you may need to configure this based on your camera setup)
-cap = cv2.VideoCapture('car_pov.mp4')  #  Youtube video
+cap = cv2.VideoCapture('car_pov.mp4')  # Youtube video
 
 # Set the known width of the car in front (in meters)
 known_car_width = 2.0  # Example: 2 meters
