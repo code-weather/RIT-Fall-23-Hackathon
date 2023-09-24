@@ -5,7 +5,7 @@ Description: Runs Eye Tracker and Car detector
 
 =======
 Authors:
-	Jessica Nguyen
+	Jessica Nguyen, Meghan Black
 
 """
 
