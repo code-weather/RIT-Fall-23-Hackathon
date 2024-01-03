@@ -119,6 +119,3 @@ def CarDetector(video_url, mixer_use):
 
     cap.release()
     cv2.destroyAllWindows()
-
-
-

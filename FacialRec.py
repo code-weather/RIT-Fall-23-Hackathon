@@ -6,12 +6,11 @@ Description: Eye dector
 Authors:
 	Jessica Nguyen
 	Jameson Wang
-	Author 3
 	...
 """
 import cv2
 import time
-import winsound  # Import winsound for Windows
+import os  # Import os for Mac
 
 
 def facialRec():
@@ -42,15 +41,14 @@ def facialRec():
             roi_color = img[y:y + h, x:x + w]
             eyes = eye_cascade.detectMultiScale(roi_gray)
 
-
             for (ex, ey, ew, eh) in eyes:
                 cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 127, 255), 2)
             # if eyes are detected, update the last-detected-time
             if len(eyes) > 0:
                 last_detection_time = time.time()
-        #if current time is greater than last_detection time by 1 second, alert driver
+        # if current time is greater than last_detection time by 1 second, alert driver
         if ((time.time() - last_detection_time) > 1.0):
-            winsound.Beep(500, 200)  # Play a different sample sound
+            os.system('say "Eyes not detected"')  # Use the 'say' command for alert
             print("Eyes not detected")
 
         cv2.imshow('img', img)
@@ -61,4 +59,3 @@ def facialRec():
 
     cap.release()
     cv2.destroyAllWindows()
-
