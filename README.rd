@@ -1,4 +1,4 @@
-# **Car Distance and Eye Tracker**
+# Car Distance and Eye Tracker
 
 This project combines a **Car Detector** and an **Eye Tracker** to enhance driving safety. It alerts drivers when they are too close to other vehicles and when their eyes are not detected on the road.
 
