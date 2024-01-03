@@ -6,9 +6,10 @@ Description: Runs Eye Tracker and Car detector
 =======
 Authors:
 	Jessica Nguyen
+	Leo Pozhenko
 	Meghan Black
 	Jameson Wang
-
+	Keaton Fiddler
 """
 
 import CarDistance
